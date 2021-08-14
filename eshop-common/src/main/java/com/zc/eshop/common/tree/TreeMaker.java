@@ -9,16 +9,10 @@ import java.util.stream.Collectors;
  * 树状结构生成器
  */
 public class TreeMaker<T extends TreeChild<T>> {
-
     Integer defaultPidValue = 0;
-
     Field pidField;
     Field idField;
-
     List<T> pidList = new ArrayList<>();
-
-
-
     /**
      * 自定义pid的默认值
      *
@@ -29,13 +23,10 @@ public class TreeMaker<T extends TreeChild<T>> {
         defaultPidValue = pid;
         return this;
     }
-
     public List<T> build(List<T> list) {
         try {
             // 遍历list，找到pid = defaultvalue 的数据，找到第一层pid
             makeField(list);
-
-
             List<T> childList = list.stream().filter(item -> {
                 try {
                     Integer pid = (Integer) pidField.get(item);

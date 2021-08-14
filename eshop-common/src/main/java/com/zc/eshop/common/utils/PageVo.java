@@ -38,7 +38,7 @@ public class PageVo<T>  {
 	/**
 	 * 当前页数
 	 */
-	private Integer currPage;
+	private Integer curPage;
 	/**
 	 * 列表数据
 	 */
@@ -48,12 +48,12 @@ public class PageVo<T>  {
 		this.list = page.getRecords();
 		this.totalCount = (int) page.getTotal();
 		this.pageSize =(int) page.getSize();
-		this.currPage =(int) page.getCurrent();
+		this.curPage =(int) page.getCurrent();
 		this.totalPage = (int)page.getPages();
 	}
 
 	public PageVo(PageReq req,Integer totalCount,List<T> list){
-		this.currPage =  req.getCurrentPage();
+		this.curPage =  req.getCurrentPage();
 		this.totalCount = totalCount;
 		this.list = list;
 	}

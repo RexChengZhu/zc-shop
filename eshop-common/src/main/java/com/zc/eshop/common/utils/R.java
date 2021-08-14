@@ -9,6 +9,7 @@
 package com.zc.eshop.common.utils;
 
 
+import com.zc.eshop.common.exception.BizCodeException;
 import lombok.Data;
 
 /**
@@ -30,6 +31,14 @@ public class R<T> {
         R<T> r = new R<>();
         r.code = 200;
         r.msg = "请求成功";
+        r.put(t);
+        return r;
+    }
+
+    public static <T> R<T> error(BizCodeException e, T t){
+        R<T> r = new R<>();
+        r.code = e.getCode();
+        r.msg = e.getMsg();
         r.put(t);
         return r;
     }

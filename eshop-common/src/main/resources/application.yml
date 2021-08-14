@@ -1,8 +1,21 @@
 spring:
-  datasource:
-    username: root
-    password: root
-    url: jdbc:mysql://192.168.10.129:3306/protocol?useUnicode=true&characterEncoding=utf-8
+  cloud:
+    gateway:
+      globalcors:
+        crosConfigurations:
+          "[/**]":
+            allow-credentials: true
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+      routes:
+        - id: path_route_admin
+          uri: lb://eshop-admin
+          predicates:
+            - Path=/admin/**
+        - id: path_route_wares
+          uri: lb://eshop-wares
+          predicates:
+            - Path=/wares/**
 
-name:
-  haha: 2223
+

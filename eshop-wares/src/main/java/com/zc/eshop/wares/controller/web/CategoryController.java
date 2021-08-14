@@ -1,4 +1,5 @@
-package com.zc.eshop.wares.controller;
+package com.zc.eshop.wares.controller.web;
+
 
 import com.zc.eshop.common.entity.WaresCategoryVo;
 import com.zc.eshop.common.utils.PageReq;
@@ -20,8 +21,8 @@ import java.util.Arrays;
  * @date 2021-08-06 20:56:08
  */
 @RestController
-@RequestMapping("wares/tcategory")
-public class TCategoryController {
+@RequestMapping("wares/category")
+public class CategoryController {
     @Autowired
     private TCategoryService tCategoryService;
 

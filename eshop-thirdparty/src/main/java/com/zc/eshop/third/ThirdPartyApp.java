@@ -1,16 +1,13 @@
-package com.zc.eshop.wares;
+package com.zc.eshop.third;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-@SpringBootApplication(scanBasePackages = "com.zc.eshop")
-@EnableSwagger2
+@SpringBootApplication
 @EnableDiscoveryClient
-public class WaresApp {
-
+public class ThirdPartyApp {
     public static void main(String[] args) {
-        SpringApplication.run(WaresApp.class,args);
+        SpringApplication.run(ThirdPartyApp.class,args);
     }
 }
