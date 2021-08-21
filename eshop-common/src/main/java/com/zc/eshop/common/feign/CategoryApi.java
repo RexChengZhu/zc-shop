@@ -3,7 +3,7 @@ package com.zc.eshop.common.feign;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 
-@FeignClient("eshop-wares")
+@FeignClient("eshop-product")
 public interface CategoryApi {
 
 
