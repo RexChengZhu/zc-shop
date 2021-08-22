@@ -14,8 +14,10 @@ import javax.validation.constraints.Null;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 分类vo
+ */
 @Data
-
 public class CategoryVo implements TreeChild<CategoryVo> {
     /**
      * 商品主键id
@@ -24,13 +26,13 @@ public class CategoryVo implements TreeChild<CategoryVo> {
     @ApiModelProperty(value = "主键id",name = "id")
     @NotNull(groups = {UpdateCategory.class},message = "更新分类，id不能为空")
     @Null(groups = {AddCategory.class},message = "添加分类，id不能有值")
-    private Integer id;
+    private Long id;
     /**
      * 父级商品的id
      */
     @TreePid
     @ApiModelProperty(value = "父级id",name = "pid")
-    private Integer pid;
+    private Long pid;
     /**
      * 商品名称
      */

@@ -4,7 +4,7 @@ import com.zc.eshop.admin.entity.TAdminUserEntity;
 import com.zc.eshop.admin.service.TAdminUserService;
 import com.zc.eshop.common.feign.CategoryApi;
 import com.zc.eshop.common.utils.PageVo;
-import com.zc.eshop.common.utils.R;
+import com.zc.eshop.common.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -46,7 +46,7 @@ public class TAdminUserController {
      * 列表
      */
     @RequestMapping("/list")
-    public R list(@RequestParam Map<String, Object> params){
+    public Result list(@RequestParam Map<String, Object> params){
         PageVo page = tAdminUserService.queryPage(params);
 
         return null;
@@ -57,7 +57,7 @@ public class TAdminUserController {
      * 信息
      */
     @RequestMapping("/info/{id}")
-    public R info(@PathVariable("id") Integer id){
+    public Result info(@PathVariable("id") Integer id){
 		TAdminUserEntity tAdminUser = tAdminUserService.getById(id);
 
         return null;
@@ -67,7 +67,7 @@ public class TAdminUserController {
      * 保存
      */
     @RequestMapping("/save")
-    public R save(@RequestBody TAdminUserEntity tAdminUser){
+    public Result save(@RequestBody TAdminUserEntity tAdminUser){
 		tAdminUserService.save(tAdminUser);
 
         return null;
@@ -77,7 +77,7 @@ public class TAdminUserController {
      * 修改
      */
     @RequestMapping("/update")
-    public R update(@RequestBody TAdminUserEntity tAdminUser){
+    public Result update(@RequestBody TAdminUserEntity tAdminUser){
 		tAdminUserService.updateById(tAdminUser);
 
         return null;
@@ -87,7 +87,7 @@ public class TAdminUserController {
      * 删除
      */
     @RequestMapping("/delete")
-    public R delete(@RequestBody Integer[] ids){
+    public Result delete(@RequestBody Integer[] ids){
 		tAdminUserService.removeByIds(Arrays.asList(ids));
 
         return null;

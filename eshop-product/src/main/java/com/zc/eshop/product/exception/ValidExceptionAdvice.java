@@ -1,7 +1,7 @@
 package com.zc.eshop.product.exception;
 
 import com.zc.eshop.common.exception.BizCodeException;
-import com.zc.eshop.common.utils.R;
+import com.zc.eshop.common.utils.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.validation.FieldError;
@@ -22,12 +22,12 @@ public class ValidExceptionAdvice {
      * @return
      */
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
-    public R handleValidException(MethodArgumentNotValidException e){
+    public Result handleValidException(MethodArgumentNotValidException e){
 
         log.error("数据校验出错{},异常类型{}",e.getMessage(),e.getClass());
         Map<String, String> collect =
                 e.getBindingResult().getFieldErrors().stream().collect(Collectors.toMap(FieldError::getField, DefaultMessageSourceResolvable::getDefaultMessage));
-        return R.error(BizCodeException.VALID_EXCEPTION,collect);
+        return Result.error(BizCodeException.VALID_EXCEPTION,collect);
     }
 
 
@@ -37,10 +37,10 @@ public class ValidExceptionAdvice {
      * @return
      */
     @ExceptionHandler(value = Exception.class)
-    public R handleException(Exception e){
+    public Result handleException(Exception e){
 
 
-        return R.error(BizCodeException.VALID_EXCEPTION,e.getMessage());
+        return Result.error(BizCodeException.VALID_EXCEPTION,e.getMessage());
     }
 
 }

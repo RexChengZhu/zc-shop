@@ -18,7 +18,7 @@ import lombok.Data;
  * @author Mark sunlightcs@gmail.com
  */
 @Data
-public class R<T> {
+public class Result<T> {
     private static final long serialVersionUID = 1L;
 
     private Integer code;
@@ -27,23 +27,23 @@ public class R<T> {
 
     private T data;
 
-    public static <T> R<T> ok(T t) {
-        R<T> r = new R<>();
+    public static <T> Result<T> ok(T t) {
+        Result<T> r = new Result<>();
         r.code = 200;
         r.msg = "请求成功";
         r.put(t);
         return r;
     }
 
-    public static <T> R<T> error(BizCodeException e, T t){
-        R<T> r = new R<>();
+    public static <T> Result<T> error(BizCodeException e, T t){
+        Result<T> r = new Result<>();
         r.code = e.getCode();
         r.msg = e.getMsg();
         r.put(t);
         return r;
     }
 
-    public R<T> put(T t) {
+    public Result<T> put(T t) {
         this.data = t;
         return this;
     }

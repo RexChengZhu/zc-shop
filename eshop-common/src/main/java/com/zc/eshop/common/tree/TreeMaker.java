@@ -29,7 +29,7 @@ public class TreeMaker<T extends TreeChild<T>> {
             makeField(list);
             List<T> childList = list.stream().filter(item -> {
                 try {
-                    Integer pid = (Integer) pidField.get(item);
+                    Object pid = pidField.get(item);
                     if (pid.equals(defaultPidValue)) {
                         pidList.add(item);
                         return false;
@@ -41,7 +41,7 @@ public class TreeMaker<T extends TreeChild<T>> {
             }).collect(Collectors.toList());
 
             for (T item : childList) {
-                Integer pid = (Integer) pidField.get(item);
+                Object pid = pidField.get(item);
                 T parent = findParent(pid, pidList);
                 if (parent == null) {
                     // 如果谁都没找到，则表示自己是第一层
@@ -53,20 +53,20 @@ public class TreeMaker<T extends TreeChild<T>> {
             }
 
         } catch (Exception ignore) {
-
+            System.out.println("");
         }
         return pidList;
 
     }
 
-    private T findParent(Integer pid, List<T> pidList) throws Exception {
+    private T findParent(Object pid, List<T> pidList) throws Exception {
         for (T pItem : pidList) {
-            Integer id = (Integer) idField.get(pItem);
+            Object id = idField.get(pItem);
             if (id.equals(pid)) {
                 return pItem;
             } else {
                 for (T t : pItem.getChild()) {
-                    Integer innerId = (Integer)idField.get(t);
+                    Object innerId = idField.get(t);
                     if (innerId.equals(pid)){
                         return t;
                     }else{
