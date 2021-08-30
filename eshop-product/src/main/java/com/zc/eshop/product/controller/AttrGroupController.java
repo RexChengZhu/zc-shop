@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Objects;
 
 
 /**
@@ -54,12 +55,12 @@ public class AttrGroupController {
 
         if (StringUtils.isNotBlank(req.getKey())) {
             // SELECT * FROM t_attr_group where catelog_id = ? and (name like %?% or descript like %?% ）
-            page = attrGroupService.page(queryPage, new QueryWrapper<AttrGroupEntity>().eq("catelog_id", req.getCatId()).
+            page = attrGroupService.page(queryPage, new QueryWrapper<AttrGroupEntity>().eq(Objects.nonNull(req.getCatId()),"catelog_id", req.getCatId()).
                     and(obj -> obj.eq("attr_group_id", req.getKey())
                             .or().like("attr_group_name", req.getKey())
                             .or().like("descript", req.getKey())));
         } else {
-            page = attrGroupService.page(queryPage, new QueryWrapper<AttrGroupEntity>().eq("catelog_id", req.getCatId()));
+            page = attrGroupService.page(queryPage, new QueryWrapper<AttrGroupEntity>().eq(Objects.nonNull(req.getCatId()),"catelog_id", req.getCatId()));
         }
 
         List<AttrGroupVo> list = AttrGroupMapper.INSTANCE.pos2vos(page.getRecords());

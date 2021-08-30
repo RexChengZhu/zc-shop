@@ -14,6 +14,6 @@ public interface CategoryBrandRelationMapper {
 
     List<CategoryBrandRelationVo> pos2vos(List<CategoryBrandRelationEntity> list);
 
-
+    List<CategoryBrandRelationEntity> vos2pos(List<CategoryBrandRelationVo> list);
 
 }

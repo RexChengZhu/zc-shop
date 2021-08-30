@@ -18,10 +18,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -43,7 +40,7 @@ public class CategoryController {
 
     @PostMapping("/list")
     @ApiOperation("根据pid查询分类列表")
-    public Result<PageVo<CategoryVo>> getList(@RequestBody PageReq<Integer> req) {
+    public Result<PageVo<CategoryVo>> getList(@RequestBody PageReq<Integer>  req) {
         log.info("分类查询列表收到请求，{}", JSON.toJSONString(req));
         Page<CategoryEntity> queryPage = new Page<>(req.getCurrentPage(), req.getPageSize());
         Page<CategoryEntity> page = categoryService.page(queryPage, new QueryWrapper<CategoryEntity>().eq(Objects.nonNull(req.getData()), "parent_cid", req.getData()));
@@ -51,7 +48,7 @@ public class CategoryController {
         return Result.ok(new PageVo<>(req, (int) page.getTotal(), voList));
     }
 
-    @PostMapping("/tree")
+    @GetMapping("/tree")
     @ApiOperation("获得所有分类的树")
     public Result<List<CategoryVo>> getTree() {
         List<CategoryEntity> list = categoryService.list(null);

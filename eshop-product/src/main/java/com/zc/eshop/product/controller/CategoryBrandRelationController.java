@@ -23,14 +23,12 @@ import java.util.List;
 
 
 /**
- * 
- *
  * @author zhucheng
  * @email sunlightcs@gmail.com
  * @date 2021-08-21 15:04:04
  */
 @RestController
-@RequestMapping("product/categorybrandrelation")
+@RequestMapping("product/categoryRelate")
 @Api(value = "品牌分类关联接口", tags = "品牌分类关联接口")
 @Slf4j
 public class CategoryBrandRelationController {
@@ -40,12 +38,25 @@ public class CategoryBrandRelationController {
 
     @PostMapping("/list")
     @ApiOperation("根据品牌id获得该品牌下得所有关联分类")
-    public Result<PageVo<CategoryBrandRelationVo>> getList(@Validated @RequestBody CategoryBrandRelationQueryVo queryVo){
+    public Result<PageVo<CategoryBrandRelationVo>> getList(@Validated @RequestBody CategoryBrandRelationQueryVo queryVo) {
         Page<CategoryBrandRelationEntity> page = categoryBrandRelationService.page(new Page<>(queryVo.getCurrentPage(), queryVo.getPageSize()),
                 new QueryWrapper<CategoryBrandRelationEntity>().eq("brand_id", queryVo.getBrandId()));
         List<CategoryBrandRelationVo> list = CategoryBrandRelationMapper.INSTANCE.pos2vos(page.getRecords());
-        return Result.ok(new PageVo<>(queryVo,(int)page.getTotal(),list));
+        return Result.ok(new PageVo<>(queryVo, (int) page.getTotal(), list));
     }
 
 
+    @PostMapping("/save")
+    @ApiOperation("根据品牌id获得该品牌下得所有关联分类")
+    public Result save(@Validated @RequestBody List<CategoryBrandRelationVo> brandRelationVo) {
+        categoryBrandRelationService.saveBatch(CategoryBrandRelationMapper.INSTANCE.vos2pos(brandRelationVo));
+        return Result.ok(null);
+    }
+
+    @PostMapping("/delete")
+    @ApiOperation("根据品牌id获得该品牌下得所有关联分类")
+    public Result delete(@RequestBody Integer id) {
+        categoryBrandRelationService.removeById(id);
+        return Result.ok(null);
+    }
 }

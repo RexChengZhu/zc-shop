@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * 异常校验器
+ */
 @Slf4j
 @RestControllerAdvice(basePackages = "com.zc.eshop.product.controller")
 public class ValidExceptionAdvice {
@@ -40,7 +43,7 @@ public class ValidExceptionAdvice {
     public Result handleException(Exception e){
 
 
-        return Result.error(BizCodeException.VALID_EXCEPTION,e.getMessage());
+        return Result.error(BizCodeException.UNKNOW_EXCEPTION,e.getMessage());
     }
 
 }

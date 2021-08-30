@@ -13,7 +13,6 @@ import javax.validation.constraints.NotNull;
 @Data
 public class AttrGroupQueryVo extends PageReq<Object> {
 
-    @NotNull
     @ApiModelProperty(value = "分类id",name = "catId")
     private Long catId;
 
